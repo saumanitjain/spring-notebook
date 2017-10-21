@@ -1,0 +1,57 @@
+# I-CM-067
+swagger: "2.0"
+info:
+  description: BizOps Jobs Config Integration API specification for Service Provider
+  version: 1.0.0
+  title: BizOps Jobs Config Integration API specification for Service Provider
+host: api-amplify.us.oracle.com:8080
+basePath: /serviceprovider/1.0
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: JobsConfig
+    description: API for Job Config Operations
+    
+schemes:
+- https
+
+paths:
+  /jobs/templates:
+    post:
+      tags:
+        - JobsConfig
+      summary: Creates a new Job Template.
+      description: Creates a new Job Template. Template denotes the batch criteria. Batch criteria would be constant for for VMA, MS should return the same template id for each create request
+      parameters:
+        - name: JobTemplate
+          in: body
+          description: "Request Body that contains data required for creating new job template"
+          required: true
+          schema:
+            $ref: "bizopsDefinitions.yaml#/definitions/JobTemplate"
+      responses:
+        '201':
+          description: Returns the Id of the Job Template
+          headers:
+            Location:
+              description: URL of new resource
+              type: string
+          schema:
+              type: object
+              description: Id of the Job Template
+              properties:
+                id:
+                  type: string
+        '400':
+          description: Malformed syntax.
+        '401':
+          description: Request does not have sufficient credentials.
+        '403':
+          description: Request is not authorized.           
+        '405':
+          description: Invalid input
+        '500':
+          description: Internal error
+
