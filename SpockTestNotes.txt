@@ -1,0 +1,37 @@
+################## Spock Testing Framework #######################
+# Used Spock (mokito) framework for unit testing
+import spock.lang.Specification 
+class HelloWorldTest extends Specification { 
+
+def "scenario 1"() { 
+  given: "An integer with value 5" 
+     def i = 5 
+  when: "This integer is multiplied by 2" 
+     i = i * 2
+  then: "The final value is 10" 
+    assert i != 5 i == 11 
+ } 
+}
+
+#given: (alias setup)
+#when:
+#then:
+#expect: expect block is the same as then, more suitable with were block
+#cleanup:cleanup block is used to free resources and is run even if the code before the block has thrown an exception. It's usually the last block in the method
+#where: this must be the last block, used to provide the parameter
+
+def 'data-driven test'() {
+ expect: x + y == z 
+ where:
+  x | y  | z
+  3 | 4  | 7  
+ 19 | 23 | 42
+ 71 | 12 | 83
+
+ 
+###Mock, Stub and Spy
+#Stub : A stub is concerned with simulating specific behaviour. In Spock this is all a stub can do, so it is kind of the simplest thing.
+You create a stub class where methods are redefined with definition as per your requirement.
+Like a mock, a stub allows unexpected invocations. However, the values returned by a stub in such cases are more ambitious.
+#Mock: It creates an object on the fly. Methods in this mock object returns the default values of return type. We can also define argument's and return type over desired method.
+#Spy : create one real object and then you spy it. Now you can mock some methods by  defining it's argument's and return type.
